@@ -42,7 +42,7 @@
             .center([-75.1652, 39.9526])  // Philadelphia, PA coordinates
             .rotate([0, 0])
             .parallels([39.9, 40.0])      // standard parallels for Pennsylvania
-            .scale(70000)                 // scale
+            .scale(100000)                 // scale
             .translate([width / 2, height / 2]);
 
         const path = d3.geoPath().projection(projection);
