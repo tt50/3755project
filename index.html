@@ -1,22 +1,224 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <!-- import topo json library-->
-    <script src="https://unpkg.com/topojson@3"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philly Subway Project</title>
     
-    <!-- import D3 Version 6 here or at the end of the body -->
+    <!-- External Libraries -->
+    <script src="https://unpkg.com/topojson@3"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.7.0/d3.min.js"></script>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            margin: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* dark mode*/
+        body.dark-mode {
+            background-color: #121212;
+            color: #f8f9fa;
+        }
+        
+        /* header*/
+        .main-header {
+            text-align: center;
+            margin: 2rem 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: inherit;
+        }
+        
+        /* train animation */
+        .train-container {
+            width: 100%;
+            height: 120px;
+            position: relative;
+            overflow: hidden;
+            margin: 2rem 0;
+            background: #f0f0f0;
+            border-top: 4px solid #333;
+            border-bottom: 4px solid #333;
+        }
+        
+        body.dark-mode .train-container {
+            background: #2a2a2a;
+            border-color: #666;
+        }
+        
+        .subway-train {
+            width: 200px;
+            height: 60px;
+            background-color: #a3a19b;
+            position: absolute;
+            border-radius: 8px;
+            animation: trainMove 10s linear infinite;
+            display: flex;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            top: 30px;
+        }
+        
+        .train-car {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* septa stripe design */
+        .train-stripe {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+        }
+        
+        .stripe-blue {
+            background-color: #1a4f8b;
+            bottom: 10px;
+        }
+        
+        .stripe-red {
+            background-color: #d22630;
+            bottom: 6px;
+        }
+        
+        .train-windows {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+        }
+        
+        .window {
+            width: 30px;
+            height: 30px;
+            background-color: #a3c6f0;
+            border-radius: 2px;
+        }
+        
+        .train-lights {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            top: 25px;
+        }
+        
+        .front-light { left: 5px; }
+        .rear-light { right: 5px; }
+        
+        @keyframes trainMove {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-200px); }
+        }
+        
+        /* dark mode */
+        #darkModeBtn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: #343a40;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        body.dark-mode #darkModeBtn {
+            background: #e9ecef;
+            color: #212529;
+        }
+        
+        /* tooltip */
+        #tooltip {
+            position: absolute;
+            background: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            pointer-events: none;
+            display: none;
+        }
+        
+        body.dark-mode #tooltip {
+            background: #2d3748;
+            color: white;
+            border-color: #4a5568;
+        }
+        
+        /* map  */
+        .map-container {
+            margin: 2rem auto;
+            text-align: center;
+        }
+        
+        #boundaryMap {
+            display: block;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode #boundaryMap {
+            background: #2d2d2d;
+        }
+    </style>
+</head>
+<body>
+    <button id="darkModeBtn">Dark Mode</button>
+    
+    <h1 class="main-header">Philly needs a Roosevelt Boulevard Subway Line</h1>
+    
+    <div class="train-container">
+        <div class="subway-train">
+            <div class="train-car">
+                <div class="train-stripe stripe-blue"></div>
+                <div class="train-stripe stripe-red"></div>
+                <div class="train-lights front-light"></div>
+                <div class="train-lights rear-light"></div>
+                <div class="train-windows">
+                    <div class="window"></div>
+                    <div class="window"></div>
+                    <div class="window"></div>
+                    <div class="window"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="map-container">
+        <p>Boundary Map</p>
+        <svg id="boundaryMap" width="800" height="600"></svg>
+    </div>
+    
+    <div id="tooltip"></div>
+
+    <script>
+        // Dark mode toggle functionality
+        document.getElementById('darkModeBtn').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            this.textContent = document.body.classList.contains('dark-mode') 
+                ? 'Light Mode' 
+                : 'Dark Mode';
+        });
+    </script>
 
     <!-- load custom D3 code (must happen after D3 is loaded) -->
     <script src="./boundaryMap.js"></script>
-
-    </head>
-
-<body>
-    <h1>Project</h1>
-    <p>Boundary Map</p>
-    <svg id="boundaryMap" width="800" height="600"></svg>
-    <div id="tooltip"></div>
 </body>
-
 </html>

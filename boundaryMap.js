@@ -88,7 +88,6 @@
                         <div>Motorcycle: ${meansOfTransportationData["Motorcycle"]}%</div>
                         <div>Bicycle, Walked, or Other Means: ${meansOfTransportationData["Bicycle, Walked, or Other Means"]}%</div>
                         <div>Worked at Home: ${meansOfTransportationData["Worked at Home"]}%</div>
-                        
                     `)
                     .style("left", (event.pageX + 10) + "px")
                     .style("top", (event.pageY - 10) + "px");
