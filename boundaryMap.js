@@ -77,10 +77,11 @@
                     .style("display", "block")
                     .html(`
                         <h3>Zipcode: ${zipCode}</h3>
+                        <div style="padding: 10px"></div>
                         <div><strong>Vehicle Ownership</strong></div>
                         <div>0 Vehicles: ${vehicleData.without_a_vehicle}%</div>
                         <div>1 or more Vehicles: ${vehicleData.one_or_more_vehicles}%</div>
-
+                        <div style="padding: 10px"></div>
                         <div><strong>Means Of Transportation</strong></div>
                         <div>Car, truck, or van: ${meansOfTransportationData["Car, truck, or van"]}%</div>
                         <div>Public transporation: ${meansOfTransportationData["Public transporation"]}%</div>
