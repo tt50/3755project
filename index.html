@@ -13,7 +13,6 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     
-
     <!-- leaftlet css -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -262,47 +261,9 @@
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
  
-     <script>
-        // Initialize the map after the container exists
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create the map instance
-            const map = L.map('map', {
-                center: [40.0369167, -75.0876667]  , // Philadelphia coordinates
-                zoom: 13,
-                preferCanvas: true
-            });
-
-            // Add the tile layer (base map)
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                noWrap: true
-            }).addTo(map);
-
-            // Add a simple marker to verify the map is working
-            L.marker([39.9526, -75.1652])
-                .addTo(map)
-                .bindPopup('Center City Philadelphia')
-                .openPopup();
-
-            // Handle dark mode toggle
-            document.getElementById('darkModeBtn').addEventListener('click', function() {
-                document.body.classList.toggle('dark-mode');
-                this.textContent = document.body.classList.contains('dark-mode') 
-                    ? 'Light Mode' 
-                    : 'Dark Mode';
-                // Refresh map after mode change
-                setTimeout(() => map.invalidateSize(), 300);
-            });
-
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                map.invalidateSize();
-            });
-        });
-    </script>
-
     <!-- load custom D3 code (must happen after D3 is loaded) -->
     <script src="./boundaryMap.js"></script>
+    <script src="./interactiveMap.js"></script>
 
 </body>
 </html>
