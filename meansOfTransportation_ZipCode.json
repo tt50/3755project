@@ -1,0 +1,83 @@
+{"means_of_transportation":[
+    {
+        "zipcode":19111,
+        "Car, truck, or van": 75.5,
+        "Public transporation": 16.1, 
+        "Taxicab": 0.1, 
+        "Motorcycle": 0.0, 
+        "Bicycle, Walked, or Other Means": 5.8, 
+        "Worked at Home": 2.5
+    },
+    {
+        "zipcode":19114,
+        "Car, truck, or van": 85.7,
+        "Public transporation": 9.8, 
+        "Taxicab": 0.0, 
+        "Motorcycle": 0.3, 
+        "Bicycle, Walked, or Other Means": 2.5, 
+        "Worked at Home": 1.7
+    },
+    {
+        "zipcode":19115,
+        "Car, truck, or van": 83.0,
+        "Public transporation": 11.0, 
+        "Taxicab": 0.0, 
+        "Motorcycle": 0.0, 
+        "Bicycle, Walked, or Other Means": 3.0, 
+        "Worked at Home": 3.0
+    },
+    {
+        "zipcode":19116,
+        "Car, truck, or van": 86.0,
+        "Public transporation": 8.0, 
+        "Taxicab": 0.0, 
+        "Motorcycle": 0.0, 
+        "Bicycle, Walked, or Other Means": 2.0, 
+        "Worked at Home": 3.0
+    },
+    {
+        "zipcode":19120,
+        "Car, truck, or van": 63.2,
+        "Public transporation": 30.0, 
+        "Taxicab": 0.1, 
+        "Motorcycle": 0.0, 
+        "Bicycle, Walked, or Other Means": 4.0, 
+        "Worked at Home": 2.7
+    },
+    {
+        "zipcode":19124,
+        "Car, truck, or van": 62.8,
+        "Public transporation": 27.3, 
+        "Taxicab": 0.2, 
+        "Motorcycle": 0.0, 
+        "Bicycle, Walked, or Other Means": 6.6, 
+        "Worked at Home": 3.1
+    },
+    {
+        "zipcode":19149,
+        "Car, truck, or van": 76.0,
+        "Public transporation": 18.0, 
+        "Taxicab": 0.0, 
+        "Motorcycle": 0.0, 
+        "Bicycle, Walked, or Other Means": 5.0, 
+        "Worked at Home": 2.0
+    },
+    {
+        "zipcode":19152,
+        "Car, truck, or van": 81.0,
+        "Public transporation": 13.0, 
+        "Taxicab": 0.0, 
+        "Motorcycle": 0.0, 
+        "Bicycle, Walked, or Other Means": 3.0,
+        "Worked at Home": 2.0
+    },
+    {
+        "zipcode":19154,
+        "Car, truck, or van": 89.3,
+        "Public transporation": 7.2, 
+        "Taxicab": 0.0, 
+        "Motorcycle": 0.2, 
+        "Bicycle, Walked, or Other Means": 2.5, 
+        "Worked at Home": 0.8
+    }
+    ]}

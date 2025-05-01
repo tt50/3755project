@@ -1,0 +1,47 @@
+{"number_of_vehicles_per_household":[
+    {
+        "zipcode":19111,
+        "without_a_vehicle": 16.3,
+        "one_or_more_vehicles": 83.6
+    },
+    {
+        "zipcode":19114,
+        "without_a_vehicle": 6.6,
+        "one_or_more_vehicles": 93.3
+    },
+    {
+        "zipcode":19115,
+        "without_a_vehicle": 12.3,
+        "one_or_more_vehicles": 85.7
+    },
+    {
+        "zipcode":19116,
+        "without_a_vehicle": 10.0,
+        "one_or_more_vehicles": 90.0
+    },
+    {
+        "zipcode":19120,
+        "without_a_vehicle": 20.6,
+        "one_or_more_vehicles": 79.4
+    },
+    {
+        "zipcode":19124,
+        "without_a_vehicle": 28.4,
+        "one_or_more_vehicles": 71.7
+    },
+    {
+        "zipcode":19149,
+        "without_a_vehicle": 16.4,
+        "one_or_more_vehicles": 83.6
+    },
+    {
+        "zipcode":19152,
+        "without_a_vehicle": 16.0,
+        "one_or_more_vehicles": 84.0
+    },
+    {
+        "zipcode":19154,
+        "without_a_vehicle": 7.3,
+        "one_or_more_vehicles": 92.6
+    }
+]}
