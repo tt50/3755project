@@ -1,11 +1,21 @@
 (function() {
     // read in zip code geojson file for boundary map
     Promise.all([
-        d3.json("./Zipcodes_Poly.geojson")
-        //d3.json("./numberOfVehiclesHousehold_ZipCode.json"),
+        d3.json("./Zipcodes_Poly.geojson"),
+        d3.json("./numberOfVehiclesHousehold_ZipCode.json")
         //d3.json("./meansOfTransporation_ZipCode.json")
     ]).then((data) => {
         const zipcodes_poly = data[0];
+        const number_of_vehicles = data[1];
+
+        // search by zipcode, for number of vehicles
+        const vehicleLookup = {};
+        number_of_vehicles.number_of_vehicles_per_household.forEach(item => {
+            vehicleLookup[item.zipcode] = {
+                without_a_vehicle: item.without_a_vehicle,
+                one_or_more_vehicles: item.one_or_more_vehicles
+            };
+        });
 
         const svg = d3.select("#boundaryMap");
         const width = +svg.attr("width");
@@ -36,18 +46,41 @@
         .attr("stroke", "#333")
         .attr("stroke-width", 0.7)
         .attr("stroke-opacity", 0.8)
-        .style("cursor", feature => { // pointer for northeast area
+        .style("cursor", feature => {
             return northeast_zipcodes.has(feature.properties.CODE) ? "pointer" : "default";
         })
-        .on("mouseover", function(event, feature) { // highlight northeast area
-            if (northeast_zipcodes.has(feature.properties.CODE)) {
+        .on("mouseover", function(event, feature) {
+            const zipCode = feature.properties.CODE;
+            const vehicleData = vehicleLookup[zipCode];
+            
+            if (northeast_zipcodes.has(zipCode)) {
                 d3.select(this).attr("fill", "orange");
             }
+
+            if (vehicleData) {
+                d3.select("#tooltip")
+                    .style("display", "block")
+                    .html(`
+                        <h3>Zipcode: ${zipCode}</h3>
+                        <div><strong>Vehicle Ownership</strong></div>
+                        <div>0 Vehicles: ${vehicleData.without_a_vehicle}%</div>
+                        <div>1 or more Vehicles: ${vehicleData.one_or_more_vehicles}%</div>
+                    `)
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 10) + "px");
+            }
         })
-        .on("mouseout", function(event, feature) { // mouse out highlight northeast area
-            if (northeast_zipcodes.has(feature.properties.CODE)) {
+        .on("mouseout", function(event, feature) {
+            const zipCode = feature.properties.CODE;
+            if (northeast_zipcodes.has(zipCode)) {
                 d3.select(this).attr("fill", "steelblue");
             }
+            d3.select("#tooltip").style("display", "none");
+        })
+        .on("mousemove", function(event) {
+            d3.select("#tooltip")
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 10) + "px");
         });
 
     }).catch((error) => {
