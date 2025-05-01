@@ -54,6 +54,24 @@
         "Worked at Home": 3.1
     },
     {
+        "zipcode":19135,
+        "Car, truck, or van": 76.4,
+        "Public transporation": 16.9, 
+        "Taxicab": 0.2, 
+        "Motorcycle": 0.4, 
+        "Bicycle, Walked, or Other Means": 4.7, 
+        "Worked at Home": 1.4
+    },
+    {
+        "zipcode":19136,
+        "Car, truck, or van": 76.3,
+        "Public transporation": 17.7, 
+        "Taxicab": 0.0, 
+        "Motorcycle": 0.1, 
+        "Bicycle, Walked, or Other Means": 4.5, 
+        "Worked at Home": 1.4
+    },
+    {
         "zipcode":19149,
         "Car, truck, or van": 76.0,
         "Public transporation": 18.0, 

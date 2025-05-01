@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,11 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     
+    <!-- leaftlet css -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+
     <style>
         * {
             padding: 0;
@@ -185,8 +191,37 @@
         body.dark-mode #boundaryMap {
             background: #2d2d2d;
         }
+
+    /* Leaflet map container */
+    .leaflet-map-container {
+            width: 1200px;
+            height: 800px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode #map {
+            background: #2d2d2d;
+        }
+
+        /* Force Leaflet to use our container dimensions */
+        .leaflet-container {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
     </style>
+
+
 </head>
+
 <body>
     <button id="darkModeBtn">Dark Mode</button>
     
@@ -213,20 +248,22 @@
         <h1 class="side-header">Boundary Map</h1>
         <svg id="boundaryMap" width="800" height="600"></svg>
     </div>
-    
+
+    <div class="leaflet-map-container">
+        <h1 class="side-header">Interactive Map</h1>
+        <div id="map"></div>
+    </div>
+
     <div id="tooltip"></div>
 
-    <script>
-        // Dark mode toggle functionality
-        document.getElementById('darkModeBtn').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            this.textContent = document.body.classList.contains('dark-mode') 
-                ? 'Light Mode' 
-                : 'Dark Mode';
-        });
-    </script>
-
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+ 
     <!-- load custom D3 code (must happen after D3 is loaded) -->
     <script src="./boundaryMap.js"></script>
+    <script src="./interactiveMap.js"></script>
+
 </body>
 </html>

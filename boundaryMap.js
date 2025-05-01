@@ -36,13 +36,13 @@
         const height = +svg.attr("height");
 
         // northeast philadelphia zipcodes
-        const northeast_zipcodes = new Set(["19111","19114","19115","19116","19120","19124","19149","19152","19154"]);
+        const northeast_zipcodes = new Set(["19111","19114","19115","19116","19120","19124","19135","19136","19149","19152","19154"]);
         
         const projection = d3.geoAlbers()
             .center([-75.1652, 39.9526])  // Philadelphia, PA coordinates
             .rotate([0, 0])
             .parallels([39.9, 40.0])      // standard parallels for Pennsylvania
-            .scale(70000)                 // scale
+            .scale(100000)                 // scale
             .translate([width / 2, height / 2]);
 
         const path = d3.geoPath().projection(projection);
