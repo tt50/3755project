@@ -2,11 +2,12 @@
     // read in zip code geojson file for boundary map
     Promise.all([
         d3.json("./Zipcodes_Poly.geojson"),
-        d3.json("./numberOfVehiclesHousehold_ZipCode.json")
-        //d3.json("./meansOfTransporation_ZipCode.json")
+        d3.json("./numberOfVehiclesHousehold_ZipCode.json"),
+        d3.json("./meansOfTransportation_ZipCode.json")
     ]).then((data) => {
         const zipcodes_poly = data[0];
         const number_of_vehicles = data[1];
+        const means_of_transportation = data[2];
 
         // search by zipcode, for number of vehicles
         const vehicleLookup = {};
@@ -14,6 +15,19 @@
             vehicleLookup[item.zipcode] = {
                 without_a_vehicle: item.without_a_vehicle,
                 one_or_more_vehicles: item.one_or_more_vehicles
+            };
+        });
+
+        // means of transportation
+        const means_of_transportationLookup = {};
+        means_of_transportation.means_of_transportation.forEach(item => {
+            means_of_transportationLookup[item.zipcode] = {
+                "Car, truck, or van": item["Car, truck, or van"],
+                "Public transporation": item["Public transporation"],
+                "Taxicab": item["Taxicab"],
+                "Motorcycle": item["Motorcycle"],
+                "Bicycle, Walked, or Other Means": item["Bicycle, Walked, or Other Means"],
+                "Worked at Home": item["Worked at Home"]
             };
         });
 
@@ -52,7 +66,8 @@
         .on("mouseover", function(event, feature) {
             const zipCode = feature.properties.CODE;
             const vehicleData = vehicleLookup[zipCode];
-            
+            const meansOfTransportationData = means_of_transportationLookup[zipCode];
+
             if (northeast_zipcodes.has(zipCode)) {
                 d3.select(this).attr("fill", "orange");
             }
@@ -65,6 +80,15 @@
                         <div><strong>Vehicle Ownership</strong></div>
                         <div>0 Vehicles: ${vehicleData.without_a_vehicle}%</div>
                         <div>1 or more Vehicles: ${vehicleData.one_or_more_vehicles}%</div>
+
+                        <div><strong>Means Of Transportation</strong></div>
+                        <div>Car, truck, or van: ${meansOfTransportationData["Car, truck, or van"]}%</div>
+                        <div>Public transporation: ${meansOfTransportationData["Public transporation"]}%</div>
+                        <div>Taxicab: ${meansOfTransportationData["Taxicab"]}%</div>
+                        <div>Motorcycle: ${meansOfTransportationData["Motorcycle"]}%</div>
+                        <div>Bicycle, Walked, or Other Means: ${meansOfTransportationData["Bicycle, Walked, or Other Means"]}%</div>
+                        <div>Worked at Home: ${meansOfTransportationData["Worked at Home"]}%</div>
+                        
                     `)
                     .style("left", (event.pageX + 10) + "px")
                     .style("top", (event.pageY - 10) + "px");
