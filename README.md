@@ -16,6 +16,6 @@ Having interaction with your project makes it more engaging to the user.
 
 
 # Setup
-Clone the repo.
-You can run `python3 -m http.server 8000` in the terminal to see the webpage locally.
+Clone the repo.<br/>
+You can run `python3 -m http.server 8000` in the terminal to see the webpage locally.<br/>
 Or you can click https://tt50.github.io/ for a live webpage link.
