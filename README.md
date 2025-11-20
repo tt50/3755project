@@ -2,7 +2,7 @@
 CIS 3755 Project
 
 # Live Link:
-https://tt50.github.io/
+-updated link- https://tt50.github.io/3755project.github.io/
 
 # Philly needs a Roosevelt Boulevard Subway Line
 
@@ -18,4 +18,4 @@ Having interaction with your project makes it more engaging to the user.
 # Setup
 Clone the repo.<br/>
 You can run `python3 -m http.server 8000` in the terminal to see the webpage locally.<br/>
-Or you can click https://tt50.github.io/ for a live webpage link.
+Or you can click https://tt50.github.io/3755project.github.io/ for a live webpage link.
